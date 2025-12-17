@@ -1,0 +1,5 @@
+<p style="color: lightgray;">Rating: 
+  @for (i of stars; track i; let idx = $index) {
+    <ion-icon name="star" [style.fontSize]="'1em'" [style.color]="idx < rating() ? starColor.color : 'medium'" [ngClass]="{'filled' : idx < rating(), 'medium' : idx >= rating()}"></ion-icon>
+  }
+</p>

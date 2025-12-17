@@ -1,0 +1,46 @@
+.movies-scroll {
+	max-height: calc(100% - 64px);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	padding: 8px 12px;
+}
+
+#open-modal {
+	padding: 12px 0px;
+	margin: auto;
+	width: 200px;
+	display: block;
+	border-radius: 999px;
+}
+
+.filled {
+  color: gold;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.empty {
+  color: lightgray;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.modalbtn {
+  --background: transparent;
+  --color: var(--ion-color-primary);
+}
+
+ion-input {
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color-valid: var(--ion-color-primary);
+  --highlight-color-invalid: var(--ion-color-primary);
+  color: var(--ion-color-primary);
+}
+
+ion-item.ion-focused {
+  --highlight-background: var(--ion-color-primary);
+}
+
+ion-item {
+  --highlight-color-focused: var(--ion-color-primary);
+}

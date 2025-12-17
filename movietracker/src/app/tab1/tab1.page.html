@@ -1,0 +1,94 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      MovieTracker
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--
+ Modal for adding a new movie 
+ https://ionicframework.com/docs/api/modal
+-->
+
+<ion-content [fullscreen]="true">
+  <ion-button id="open-modal">
+  add new movie
+  </ion-button>
+
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()" class="modalbtn">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Add movie</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true" class="modalbtn">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Enter the movie's name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Movie name"
+            [(ngModel)]="movieName"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Enter the movie's genre"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Movie genre"
+            [(ngModel)]="movieGenre"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Enter the movie's release date"
+            labelPlacement="stacked"
+            type="date"
+            placeholder="Movie release date"
+            [(ngModel)]="movieReleaseDate"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          @for(star of stars; track star; let i= $index) {
+            <span (click)="setRating(i + 1)" [style.color]="i < rating() ? starColor.color : 'lightgray'" [ngClass]="{'filled' : i < rating(), 'empty' : i >= rating()}">
+              {{ i < rating() ? '★' : '☆' }}
+            </span>
+          }
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <div class="movies-scroll">
+    <ion-list>
+      @if(Movies.length === 0) {
+        <ion-item>
+          <ion-label>No movies added yet. Click "add new movie" to get started!</ion-label>
+        </ion-item>
+      } 
+      @else 
+      {
+        @for (item of Movies; track item.id) {
+          <ion-item>
+            <ion-label>
+              <h2>{{item.title}} ({{item.genre}}) - {{item.releaseDate}}</h2>
+              <app-stars [rating]="item.rating"></app-stars>
+            </ion-label>
+            <ion-button slot="end" fill="clear" color="danger" (click)="deleteMovie($index)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+          </ion-item>
+        }
+      }
+    </ion-list>
+  </div>
+</ion-content>
